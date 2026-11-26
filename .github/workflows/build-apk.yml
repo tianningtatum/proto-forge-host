@@ -10,15 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
-      - uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.5'
+
+      - name: Install Gradle 8.5
+        run: |
+          curl -fsSL https://services.gradle.org/distributions/gradle-8.5-bin.zip -o gradle.zip
+          unzip -q gradle.zip -d /opt/gradle
+          echo "/opt/gradle/gradle-8.5/bin" >> $GITHUB_PATH
+
       - name: Assemble Debug APK
-        run: gradle assembleDebug
+        run: /opt/gradle/gradle-8.5/bin/gradle assembleDebug --no-daemon
+
       - name: Upload ProtoForge-Host.apk
         uses: actions/upload-artifact@v4
         with:
