@@ -84,7 +84,8 @@ class GameService : Service() {
         val program: String,
         val raceMs: Long,
         val finishedAt: Long,
-        val players: List<String>
+        val players: List<String>,
+        val lives: Int = 3
     )
 
     data class SseClient(
@@ -438,7 +439,7 @@ class GameService : Service() {
                                 room.finishedAt = now
                                 room.raceMs = max(1000L, now - room.raceStart)
                                 if (finishers.none { it.team == room.key }) {
-                                    finishers.add(Finisher(room.key, room.program, room.raceMs, now, room.players.map { it.name }))
+                                    finishers.add(Finisher(room.key, room.program, room.raceMs, now, room.players.map { it.name }, room.lives))
                                 }
                                 val sorted = finishers.sortedBy { it.raceMs }
                                 room.rank = sorted.indexOfFirst { it.team == room.key } + 1
@@ -476,7 +477,7 @@ class GameService : Service() {
         val roomKey = req.optString("room")
         when (type) {
             "target" -> {
-                targetGoal = max(1, min(12, req.optInt("n", 5)))
+                targetGoal = max(1, min(12, req.optInt("n", 3)))
                 for (r in rooms.values) synchronized(r) { r.target = targetGoal }
             }
             "resetBoard" -> {
@@ -586,6 +587,7 @@ class GameService : Service() {
             fo.put("raceMs", f.raceMs)
             fo.put("finishedAt", f.finishedAt)
             fo.put("players", JSONArray(f.players))
+            fo.put("lives", f.lives)
             farr.put(fo)
         }
         root.put("finishers", farr)
