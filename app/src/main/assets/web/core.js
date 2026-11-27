@@ -1,9 +1,8 @@
 // ---------------------------------------------------------------------------
 // FIX-IT CORE — deterministic rounds, no network.
 // Every phone builds the same round from (game, team code, team size, run #,
-// round, attempt counter). The operator's phone judges the repair; the
-// others only show manual pages. Phones stay in step by typing the 4-digit
-// code the operator's phone shows at the end of each attempt.
+// round, attempt counter). The Product Lead's phone judges the sprint; the
+// others only show playbook pages.
 // ---------------------------------------------------------------------------
 var FIX = (function () {
   'use strict';
@@ -82,7 +81,7 @@ var FIX = (function () {
     if (a.a === 'lastOf') return 'cut the last ' + a.c + ' wire';
     return 'cut the first ' + a.c + ' wire';
   }
-  function genWires(t, r, isPresent) {
+  function genWires(t, r) {
     var tables = {};
     for (var n = 3; n <= 6; n++) {
       var rules = [], k = n <= 4 ? 2 : 3;
@@ -96,8 +95,7 @@ var FIX = (function () {
       rules.push({ cond: null, act: { a: 'pos', k: t.randInt(0, n - 1) } });
       tables[n] = rules;
     }
-    var page = { type: 'wires', tables: tables };
-    return page;
+    return { type: 'wires', tables: tables };
   }
   function wiresInstance(t, page, r, F) {
     var maxN = r <= 2 ? 4 : r <= 4 ? 5 : 6, n = t.randInt(3, maxN), rules = page.tables[n];
@@ -154,7 +152,6 @@ var FIX = (function () {
       var order = four.slice().sort(function (a, b) { return col.indexOf(a) - col.indexOf(b); });
       return { type: 'keypad', shown: t.shuffle(four.slice()), answer: order };
     }
-    // fallback (practically never): use the whole first 4 of column 0
     var c0 = page.cols[0].slice(0, 4);
     return { type: 'keypad', shown: t.shuffle(c0.slice()), answer: c0 };
   }
@@ -223,7 +220,7 @@ var FIX = (function () {
     return c;
   }
 
-  // ------------------------------------------------ text helpers for the manual
+  // ------------------------------------------------ text helpers for the playbook
   function wiresManual(page) {
     var out = {};
     for (var n = 3; n <= 6; n++) {
@@ -244,12 +241,12 @@ var FIX = (function () {
   var AL = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
   function checkCode(f) {
     var str = ['fx1', f.title, f.code, f.N, f.s, f.runNo, f.fixed, f.attempts, f.lives, f.status].join('|');
-    var h = hash('protoforge-techno-26|' + str), out = '';
+    var h = hash('protoforge-entech30-v3|' + str), out = '';
     for (var i = 0; i < 6; i++) { out += AL[h % AL.length]; h = Math.floor(h / AL.length); }
     return out;
   }
 
- // ------------------------------------------------ instructor: check and rank pasted logs
+  // ------------------------------------------------ instructor: check and rank pasted logs
   function points(rank, livesLeft) {
     var base = rank === 1 ? 100 : rank <= 3 ? 95 : rank <= 6 ? 90 : 80;
     var lost = typeof livesLeft === 'number' ? Math.max(0, LIVES - livesLeft) : 0;
