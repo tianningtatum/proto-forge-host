@@ -76,8 +76,8 @@ table.board tr.wait td{color:var(--dim)}
   <div class="tcard" style="margin-top:0">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
       <div><span class="label">Goal: sprints to validate in one game</span>
-        <div class="stepper" style="max-width:220px;margin-top:6px"><button id="tgMinus" aria-label="Lower goal">-</button><output id="tgN">5</output><button id="tgPlus" aria-label="Raise goal">+</button></div></div>
-      <p class="note" style="max-width:36ch;margin:0">Ranked by race time (team's first Start to goal). 1st: <b>100</b>. Next 2: <b>95</b>. Next 3: <b>90</b>. Everyone else: <b>80</b>.</p>
+        <div class="stepper" style="max-width:220px;margin-top:6px"><button id="tgMinus" aria-label="Lower goal">-</button><output id="tgN">3</output><button id="tgPlus" aria-label="Raise goal">+</button></div></div>
+      <p class="note" style="max-width:38ch;margin:0">Ranked by race time. 1st: <b>100</b> · 2nd–3rd: <b>95</b> · 4th–6th: <b>90</b> · Others: <b>80</b> (−3 pts per lost iteration).</p>
     </div>
     <div class="tblw" style="margin-top:14px;overflow-x:auto"><table class="board"><thead><tr><th>Place</th><th>Team</th><th>Track / Program</th><th>Race time</th><th>Points</th></tr></thead><tbody id="board"></tbody></table></div>
     <div class="tfoot" style="margin-top:10px"><button class="mini" id="copyBoard">Copy results</button><button class="mini" id="resetBoard">Reset for next class</button></div>
@@ -149,15 +149,15 @@ table.board tr.wait td{color:var(--dim)}
     return '<div class="team" style="--tc:' + T.colors.accent + '"><div class="th"><div style="min-width:0"><h3>' + esc(r.key) + '</h3><span class="pg">' + esc(T.title) + ' · ' + esc(T.program) + '</span></div>' + badge + '</div>' +
       nums + opLine + '<div class="ppl">' + ppl + '</div><div class="tfoot">' + btns + '</div></div>';
   }
-  function points(rank) { return FIX.points(rank); }
+  function points(rank, lives) { return FIX.points(rank, lives); }
   function race(ms) { var s = Math.max(0, Math.floor(ms / 1000)), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = s % 60; return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(x).padStart(2, '0'); }
   function ordinal(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
   function boardRows() {
     var fin = (last.finishers || []).slice().sort(function (a, b) { return a.raceMs - b.raceMs; }), done = {};
-    var rows = fin.map(function (f, i) { done[f.team] = 1; return { place: ordinal(i + 1), team: f.team, game: (TH[f.program] || TH.ideation).title, at: race(f.raceMs), pts: points(i + 1), wait: false, players: f.players }; });
+    var rows = fin.map(function (f, i) { done[f.team] = 1; return { place: ordinal(i + 1), team: f.team, game: (TH[f.program] || TH.ideation).title, at: race(f.raceMs), pts: points(i + 1, f.lives), wait: false, players: f.players }; });
     last.rooms.forEach(function (r) {
       if (done[r.key]) return;
-      rows.push({ place: '-', team: r.key, game: (TH[r.program] || TH.ideation).title, at: r.state === 'playing' ? 'playing · ' + r.fixed + '/' + r.target : 'not finished', pts: 80, wait: true, players: r.players.map(function (p) { return p.name; }) });
+      rows.push({ place: '-', team: r.key, game: (TH[r.program] || TH.ideation).title, at: r.state === 'playing' ? 'playing · ' + r.fixed + '/' + r.target : 'not finished', pts: points(99, r.lives), wait: true, players: r.players.map(function (p) { return p.name; }) });
     });
     return rows;
   }
