@@ -1,6 +1,6 @@
 # ProtoForge — Technopreneurship Team Sprint Game
 
-**ProtoForge** is a fast-paced, zero-projector classroom game for engineering **Technopreneurship** teams (3–6 members per team) practicing **idea generation, MVP scoping, BOM trade-offs, and customer validation**.
+**ProtoForge** is a fast-paced, classroom game for engineering **Technopreneurship** teams (3–6 members per team) practicing **idea generation, MVP scoping, BOM trade-offs, and customer validation**.
 
 One Android phone acts as the **Host Server** (displaying a QR code and local address over hotspot or classroom Wi-Fi—no internet required), while students join directly in their mobile browsers (`Chrome` / `Safari`) with zero app installation.
 
