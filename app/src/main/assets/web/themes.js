@@ -1,22 +1,21 @@
-// Technopreneurship Programs / Tracks for ProtoForge
 var FIXTHEMES = {
   ideation: {
     id: 'ideation',
     title: 'IDEA SPARK',
-    program: 'Divergent Ideation',
+    program: 'Idea Gen & JTBD (T4-T6)',
     machine: 'Venture Ideation Board',
-    tagline: 'A messy real-world pain point needs a breakthrough concept. One of you runs the Venture Board. Everyone else holds a piece of the Ideation Playbook.',
+    tagline: 'Go wide before you narrow: apply SCAMPER, reverse thinking, JTBD opportunity gaps, and NDSB on a shared problem before locking a solution.',
     mods: {
-      wires: 'Pain-Point Filter',
-      gauge: 'Market Feasibility',
-      keypad: 'SCAMPER Matrix',
-      switches: 'Assumption Gates',
-      procedure: 'Ideation Sprint'
+      wires: 'SCAMPER & Reverse',
+      gauge: 'JTBD Opportunity',
+      keypad: 'Innovation Matrix',
+      switches: 'NDSB & SDG Filter',
+      procedure: 'Idea Screen Gate'
     },
-    gaugeUnit: '%',
-    gaugePrefix: 'TAM',
-    posWord: 'Tier',
-    steps: ['Frame Pain', 'SCAMPER Twist', 'Analogy Shift', 'Crazy-8s Pick', 'Value Hook', 'Kill Bias'],
+    gaugeUnit: 'pts',
+    gaugePrefix: 'OPP',
+    posWord: 'Band',
+    steps: ['Frame Job', 'SCAMPER Twist', 'Reverse Problem', 'Score Opportunity', 'State NDSB', 'Pick Runner-Up'],
     symbols: [
       '<circle cx="24" cy="24" r="14"/><path d="M24 10v28M10 24h28"/>',
       '<polygon points="24,6 42,38 6,38"/>',
@@ -36,28 +35,28 @@ var FIXTHEMES = {
       ink: '#eef0f2', dim: '#a0a8b2', accent: '#ffc21a', accentInk: '#1a1400', accent2: '#7fd3ff'
     },
     debrief: [
-      'The Product Lead had to describe messy customer pain points without seeing the playbook rules. How did your team avoid jumping straight to a gadget or app before confirming the root problem?',
-      'Playbook holders couldn\'t see the Venture Board. When someone said "that\'s not on my playbook page," how quickly did the team route the question to the right teammate?',
-      'In early ideation, every founder holds a different bias (tech-first, cost-first, user-first). How did rotating the Product Lead role change how quieter members contributed?'
+      'Did your team separate divergent idea generation (SCAMPER / reverse thinking) from convergent screening, or did someone judge ideas too early?',
+      'How did you distinguish a customer job statement (stable need) from a solution feature, and identify underserved outcomes?',
+      'Which idea did you keep as a runner-up in case your primary test fails, and how did you avoid fabricating AI-generated interview data?'
     ]
   },
   mvp: {
     id: 'mvp',
-    title: 'MVP FORGE',
-    program: 'Product Development',
-    machine: 'Prototype Bench',
-    tagline: 'A hardware-software prototype is hitting field constraints. One of you operates the Prototype Bench. Everyone else holds the DFM & Validation Manual.',
+    title: 'PRETOTYPE LAB',
+    program: 'Proto & Pretotype (T7)',
+    machine: 'Test & Feedback Bench',
+    tagline: 'Test "should we build it?" and "can we build it?" cheaply with XYZ hypotheses, pretotypes (Fake Door, Wizard of Oz, Pinocchio), and Feedback Capture Grids.',
     mods: {
-      wires: 'BOM Trade-Offs',
-      gauge: 'Unit Economics',
-      keypad: 'TRL Milestones',
-      switches: 'Design-for-Mfg',
-      procedure: 'Validation Loop'
+      wires: 'Pretotype Method',
+      gauge: 'XYZ Target %',
+      keypad: 'Fidelity & Rig Icons',
+      switches: 'Honest Test Rules',
+      procedure: 'Capture & Decide'
     },
-    gaugeUnit: 'PHP',
-    gaugePrefix: 'BOM',
-    posWord: 'Spec',
-    steps: ['Define MVP', 'Cut Scope', 'Bench Test', 'User Trial', 'Measure KPI', 'Pivot Gate'],
+    gaugeUnit: '%',
+    gaugePrefix: 'XYZ',
+    posWord: 'Tier',
+    steps: ['Write XYZ', 'Run Pretotype', 'Watch & Quiet', 'Fill 4-Box Grid', 'Check Ethics', 'Keep or Pivot'],
     symbols: [
       '<rect x="8" y="8" width="13" height="13"/><rect x="27" y="8" width="13" height="13"/><rect x="8" y="27" width="13" height="13"/><rect x="27" y="27" width="13" height="13"/>',
       '<path d="M6 24h10l5-12 6 24 5-12h10"/>',
@@ -77,28 +76,28 @@ var FIXTHEMES = {
       ink: '#eaeff7', dim: '#97a5bb', accent: '#38bdf8', accentInk: '#061826', accent2: '#ffd400'
     },
     debrief: [
-      'BOM Trade-Offs and Unit Economics forced hard cuts under time pressure. Which feature did your team want to keep that the manual forced you to strip out?',
-      'Design-for-Manufacturing switches depended on the Prototype Serial Code. What happened when someone acted before checking the serial condition?',
-      'Real engineering startups fail when teams build full tooling before testing their riskiest assumption. How does this sprint mirror Lean Startup Build-Measure-Learn?'
+      'Did your test measure real user action (Z) with a clear threshold (X%) for a defined group (Y), rather than asking "do you like it?"',
+      'How did you keep pretotyping honest—no fake reviews, clear pre-order terms, and no defending your prototype while watching users?',
+      'What did you put in Likes, Criticisms, Questions, and Ideas on your Feedback Capture Grid to change your next iteration?'
     ]
   },
   pivot: {
     id: 'pivot',
-    title: 'PIVOT LAB',
-    program: 'Customer & Market Fit',
-    machine: 'Discovery Console',
-    tagline: 'Field interviews just contradicted your assumptions. One of you faces the Discovery Console. Everyone else holds the Customer Validation Rules.',
+    title: 'IP & MARKET FIT',
+    program: 'IP, Value & GTM (T8-T10)',
+    machine: 'Venture Strategy Board',
+    tagline: 'Check IPOPHL/RA 8293 protection and prior art, turn "it" features into "you" value propositions, map competitors + PESTEL, and size TAM-SAM-SOM.',
     mods: {
-      wires: 'Channel Mix',
-      gauge: 'CAC / LTV Ratio',
-      keypad: 'Persona Signals',
-      switches: 'Pivot Triggers',
-      procedure: 'Discovery Gate'
+      wires: 'IP & Prior Art',
+      gauge: 'SOM / Pricing',
+      keypad: 'Lean & 7Ps Icons',
+      switches: 'Ethics & Code Gate',
+      procedure: 'Sales & GTM Loop'
     },
-    gaugeUnit: 'x',
-    gaugePrefix: 'LTV',
-    posWord: 'Move',
-    steps: ['Interview', 'Spot Bias', 'Test Price', 'Log Churn', 'Re-Segment', 'Lock Fit'],
+    gaugeUnit: 'PHP',
+    gaugePrefix: 'SOM',
+    posWord: 'Step',
+    steps: ['Prior-Art Check', 'Turn "It" to "You"', 'Map Rivals & PESTEL', 'Size TAM-SAM-SOM', 'Pick Price & Channel', 'Follow Up'],
     symbols: [
       '<path d="M10 12h28v18H18l-8 6V12z"/>',
       '<circle cx="24" cy="24" r="15"/><path d="M16 24h16M24 16v16"/>',
@@ -118,28 +117,28 @@ var FIXTHEMES = {
       ink: '#f2ede5', dim: '#ab9f8d', accent: '#ff8a1f', accentInk: '#1f1000', accent2: '#ffd166'
     },
     debrief: [
-      'When field signals flipped (even vs. odd serial rule), did your Product Lead pause to verify or rush ahead and burn a spare iteration?',
-      'Which Persona Signal symbols caused confusion when describing them verbally, and how did your team standardize your vocabulary?',
-      'In Technopreneurship, falling in love with your first engineering design is fatal. What is one assumption in your own team\'s project that you need to test this week?'
+      'How did you translate technical specs ("it") into customer pain/gain ("you") and separate your business model from your revenue model?',
+      'Which IP tool fits your technical solution under RA 8293 (patent, utility model, industrial design, copyright, trademark, or trade secret), and what prior art did you check?',
+      'How did you account for "doing nothing" as a competitor, size year-1 SOM realistically, and handle price objections with value?'
     ]
   },
   launch: {
     id: 'launch',
-    title: 'SCALE RUN',
-    program: 'Full Venture Sprint',
-    machine: 'Launch Readiness Rig',
-    tagline: 'Combined Idea-to-Launch pressure test across ideation, BOM feasibility, and customer validation. Communicate fast—3 mistakes end the run.',
+    title: 'FINANCE & PITCH',
+    program: 'Finance & Pitch (T11-T12)',
+    machine: 'Launch & Pitch Deck Rig',
+    tagline: 'Match funding to stage (DOST grants, pre-orders, debt, equity), track cash vs. profit, compute break-even, pick PH legal form, and nail the 12-slide pitch.',
     mods: {
-      wires: 'Value Stream',
-      gauge: 'Burn & Margin',
-      keypad: 'IP & Moat Icons',
-      switches: 'Compliance Rig',
-      procedure: 'Go-To-Market'
+      wires: 'Funding & Legal',
+      gauge: 'Break-Even Units',
+      keypad: 'Pitch Deck Pillars',
+      switches: 'Cash vs Profit Gate',
+      procedure: '7-Min Pitch Flow'
     },
-    gaugeUnit: '%',
-    gaugePrefix: 'ROI',
-    posWord: 'Gate',
-    steps: ['Validate', 'Freeze BOM', 'File IP', 'Pilot Run', 'Price Tier', 'Ship MVP'],
+    gaugeUnit: 'u',
+    gaugePrefix: 'BEP',
+    posWord: 'Tier',
+    steps: ['Open With Person', 'Show Prototype & XYZ', 'State TAM-SAM-SOM', 'Prove Break-Even', 'Give Legal & Ask', 'Answer With Proof'],
     symbols: [
       '<path d="M24 6l5 12h13l-10 8 4 13-12-8-12 8 4-13-10-8h13z"/>',
       '<circle cx="24" cy="24" r="15"/><path d="M15 24l6 6 12-12"/>',
@@ -159,9 +158,91 @@ var FIXTHEMES = {
       ink: '#eaf4ef', dim: '#95b0a4', accent: '#35c66f', accentInk: '#03210f', accent2: '#ffd166'
     },
     debrief: [
-      'Under combined pressure, how did your team balance speed against verification before confirming a gate?',
-      'Every member held different playbook rules and couldn\'t look at the Product Lead\'s screen. How does that mirror real cross-functional engineering startups?',
-      'What single communication habit made the biggest difference between your fastest and slowest round?'
+      'Why can a startup show profit on paper (income statement) yet lose cash (cash-flow statement) due to unpaid receivables, inventory, or equipment purchases?',
+      'Which Philippine legal form (sole proprietorship, OPC under RA 11232, partnership, or corporation) and funding mix fits your risk and stage?',
+      'How will your team keep the pitch deck to 12 slides or fewer with point-stating headlines, cite sources on every number, and answer untested questions honestly?'
+    ]
+  },
+  ece: {
+    id: 'ece',
+    title: 'ELECTRONICS ENGG',
+    program: 'Electronics Engineering',
+    machine: 'Smart Sensor & Comms Rig',
+    tagline: 'Design low-power electronics, embedded telemetry, RF/IoT links, and field-ready prototypes for Philippine communities, farms, and hazard alerts.',
+    mods: {
+      wires: 'Signal & Bus Path',
+      gauge: 'Power & SNR',
+      keypad: 'RF & Sensor Icons',
+      switches: 'EMC & Safety Rig',
+      procedure: 'Field Pilot Loop'
+    },
+    gaugeUnit: 'dBm',
+    gaugePrefix: 'PWR',
+    posWord: 'Tap',
+    steps: ['Breadboard Core', 'Test Link Range', 'Log Field Data', 'Cut Power Draw', 'Certify Safety', 'Pilot & Scale'],
+    symbols: [
+      '<path d="M6 24h10l4-10 6 20 4-10h12"/>',
+      '<circle cx="24" cy="24" r="6"/><path d="M14 14a14 14 0 0 0 0 20M34 14a14 14 0 0 1 0 20"/>',
+      '<rect x="12" y="12" width="24" height="24" rx="3"/><path d="M18 6v6M30 6v6M18 36v6M30 36v6M6 18h6M6 30h6M36 18h6M36 30h6"/>',
+      '<path d="M24 8l12 20H12L24 8z"/><circle cx="24" cy="23" r="2"/>',
+      '<path d="M8 34l10-12 8 7 14-17"/><path d="M32 12h8v8"/>',
+      '<rect x="8" y="14" width="32" height="20" rx="4"/><line x1="16" y1="24" x2="32" y2="24"/>',
+      '<circle cx="24" cy="24" r="14"/><path d="M24 10v14l9 5"/>',
+      '<path d="M10 38V16l14-8 14 8v22"/><rect x="19" y="24" width="10" height="14"/>',
+      '<path d="M12 12h24v24H12z"/><circle cx="18" cy="18" r="2"/><circle cx="30" cy="30" r="2"/>',
+      '<path d="M8 24h12l4-8 4 16 4-8h12"/>',
+      '<polygon points="24,7 41,24 24,41 7,24"/>',
+      '<path d="M14 34c4-12 10-18 14-18s10 6 14 18"/>'
+    ],
+    colors: {
+      bg: '#0b1320', plate: '#142238', plate2: '#1d2f4b', edge: '#314b73',
+      ink: '#edf3fc', dim: '#9cb2d1', accent: '#22d3ee', accentInk: '#041c24', accent2: '#fbbf24'
+    },
+    debrief: [
+      'For an ECE venture (such as landslide/flood telemetry, smart metering, or rural comms), what was the cheapest prototype or pretotype you could test before full PCB/enclosure build?',
+      'Which IP protections under RA 8293 apply to circuits, sensor layouts, firmware/software, and brand names, and what prior art (e.g., G08B, H04) should you check?',
+      'How do power draw, component lead times, and safety/compliance affect your unit cost, break-even count, and 30-day field pilot milestone?'
+    ]
+  },
+  envi: {
+    id: 'envi',
+    title: 'ENVI & SANITARY ENGG',
+    program: 'Environmental & Sanitary Engg',
+    machine: 'Water, Waste & Air Rig',
+    tagline: 'Solve water quality, wastewater/septic treatment, solid-waste recovery, and air/flood resilience with compliant, low-cost, sustainable engineering.',
+    mods: {
+      wires: 'Treatment Train',
+      gauge: 'DO / BOD / Flow',
+      keypad: 'Sanitation & SDG Icons',
+      switches: 'DENR & Health Gate',
+      procedure: 'Barangay Pilot Loop'
+    },
+    gaugeUnit: 'mg/L',
+    gaugePrefix: 'WTR',
+    posWord: 'Stage',
+    steps: ['Check Baseline', 'Test Bench Sample', 'Verify Permit/Code', 'Run LGU/Site Pilot', 'Price & Maintenance', 'Audit Impact'],
+    symbols: [
+      '<path d="M24 7c8 10 13 16 13 22a13 13 0 0 1-26 0c0-6 5-12 13-22z"/>',
+      '<path d="M14 28c3-4 7-4 10 0s7 4 10 0"/><path d="M14 35c3-4 7-4 10 0s7 4 10 0"/>',
+      '<rect x="10" y="10" width="28" height="28" rx="6"/><path d="M17 24h14M24 17v14"/>',
+      '<path d="M24 8l13 22H11L24 8z"/>',
+      '<circle cx="24" cy="24" r="14"/><path d="M16 24l5 5 11-11"/>',
+      '<path d="M10 36h28M14 36V20l10-8 10 8v16"/>',
+      '<path d="M12 14h24M12 24h18M12 34h12"/>',
+      '<circle cx="18" cy="20" r="6"/><circle cx="30" cy="28" r="6"/>',
+      '<path d="M9 18l15 10 15-10"/><rect x="9" y="14" width="30" height="20" rx="2"/>',
+      '<path d="M24 8v32M15 17l9-9 9 9"/>',
+      '<polygon points="24,6 40,16 36,36 12,36 8,16"/>',
+      '<path d="M10 30c6-12 22-12 28 0"/>'
+    ],
+    colors: {
+      bg: '#0c1915', plate: '#152b24', plate2: '#1d3b32', edge: '#2f594c',
+      ink: '#eaf7f2', dim: '#97bfb2', accent: '#34d399', accentInk: '#032117', accent2: '#fde047'
+    },
+    debrief: [
+      'For Environmental & Sanitary Engineering ventures (like precast septic systems, rainwater harvesting, waste/water treatment, or flood/air monitoring), how do you test demand before building full infrastructure?',
+      'How do you balance environmental/SDG impact and regulatory compliance with customer willingness to pay—especially when "doing nothing" or LGU/barangay processes are involved?',
+      'What milestone, permit/sign-off, maintenance plan, and honest claim check will convince a panel that your solution works safely in the field?'
     ]
   }
 };
