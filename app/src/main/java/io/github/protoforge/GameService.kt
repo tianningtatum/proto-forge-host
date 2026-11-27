@@ -97,7 +97,7 @@ class GameService : Service() {
     private val rooms = ConcurrentHashMap<String, Room>()
     private val finishers = CopyOnWriteArrayList<Finisher>()
     private val clients = CopyOnWriteArrayList<SseClient>()
-    @Volatile private var targetGoal = 5
+    @Volatile private var targetGoal = 3
     @Volatile private var running = false
     private var serverSocket: ServerSocket? = null
     private val pool = Executors.newCachedThreadPool()
