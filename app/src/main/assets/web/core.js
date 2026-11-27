@@ -249,20 +249,24 @@ var FIX = (function () {
     return out;
   }
 
-  // ------------------------------------------------ teacher: check and rank pasted logs
-  function points(rank) { return rank === 1 ? 100 : rank <= 3 ? 95 : rank <= 6 ? 90 : 80; }
+ // ------------------------------------------------ instructor: check and rank pasted logs
+  function points(rank, livesLeft) {
+    var base = rank === 1 ? 100 : rank <= 3 ? 95 : rank <= 6 ? 90 : 80;
+    var lost = typeof livesLeft === 'number' ? Math.max(0, LIVES - livesLeft) : 0;
+    return Math.max(60, base - lost * 3);
+  }
   function parseLog(t) {
     function m(re) { var r = t.match(re); return r ? r[1].trim() : null; }
-    var f = { title: m(/^\s*([A-Z][A-Z ]+?)\s*·/m), code: m(/Team:\s*([A-Z0-9]+)/), N: m(/Station\s+\d+\s+of\s+(\d+)/), s: m(/Station\s+(\d+)\s+of/),
-      runNo: m(/Game\s+(\d+)/), fixed: m(/Machines fixed:\s*(\d+)/), attempts: m(/Attempts:\s*(\d+)/), lives: m(/Spare parts left:\s*(\d+)/), status: m(/Status:\s*([a-z0-9 #]+)/) };
+    var f = { title: m(/^\s*([A-Z][A-Z &]+?)\s*·/m), code: m(/Team:\s*([A-Z0-9]+)/), N: m(/Station\s+\d+\s+of\s+(\d+)/), s: m(/Station\s+(\d+)\s+of/),
+      runNo: m(/Game\s+(\d+)/), fixed: m(/Sprints (?:validated|fixed):\s*(\d+)/), attempts: m(/Attempts:\s*(\d+)/), lives: m(/Iterations left:\s*(\d+)/), status: m(/Status:\s*([a-z0-9 #]+)/) };
     var code = m(/Check:\s*([A-Z0-9]+)/), players = m(/Players:\s*(.+)$/m);
     if (Object.keys(f).some(function (k) { return f[k] === null; }) || !code) return { ok: false, why: 'incomplete', team: f.code };
     ['N', 's', 'runNo', 'fixed', 'attempts', 'lives'].forEach(function (k) { f[k] = +f[k]; });
     var ok = checkCode(f) === code, race = f.status.match(/in (\d+)s/);
-    return { ok: ok, why: ok ? '' : 'edited', f: f, team: f.code, players: players || '', finished: /^finished/.test(f.status), raceSec: race ? +race[1] : null };
+    return { ok: ok, why: ok ? '' : 'edited', f: f, team: f.code, players: players || '', finished: /^finished/.test(f.status), raceSec: race ? +race[1] : null, lives: f.lives };
   }
   function rankLogs(text) {
-    var starts = [], re = /^[ \t]*[A-Z][A-Z ]+ · [^\n]*$/gm, x;
+    var starts = [], re = /^[ \t]*[A-Z][A-Z &]+ · [^\n]*$/gm, x;
     while ((x = re.exec(text))) starts.push(x.index);
     var blocks = starts.map(function (st, i) { return text.slice(st, i + 1 < starts.length ? starts[i + 1] : text.length); });
     var teams = {}, problems = [], checked = 0;
@@ -273,12 +277,15 @@ var FIX = (function () {
       var who = L.players.split(',').map(function (n) { return n.trim().toLowerCase(); }).sort().join(',');
       var key = L.f.title + '|' + L.f.code + '|' + who, cur = teams[key];
       var better = !cur || (L.finished && (!cur.finished || L.raceSec < cur.raceSec)) || (!L.finished && !cur.finished && L.f.fixed > cur.fixed);
-      if (better) teams[key] = { title: L.f.title, team: L.f.code, players: L.players, finished: L.finished, raceSec: L.raceSec, fixed: L.f.fixed, game: L.f.runNo };
+      if (better) teams[key] = { title: L.f.title, team: L.f.code, players: L.players, finished: L.finished, raceSec: L.raceSec, fixed: L.f.fixed, lives: L.lives, game: L.f.runNo };
     });
     var list = Object.keys(teams).map(function (k) { return teams[k]; });
     list.sort(function (a, b) { if (a.finished !== b.finished) return a.finished ? -1 : 1; if (a.finished) return a.raceSec - b.raceSec; return b.fixed - a.fixed; });
     var place = 0;
-    list.forEach(function (t) { if (t.finished) { place++; t.place = place; t.points = points(place); } else { t.place = null; t.points = 80; } });
+    list.forEach(function (t) {
+      if (t.finished) { place++; t.place = place; t.points = points(place, t.lives); }
+      else { t.place = null; t.points = points(99, t.lives); }
+    });
     return { rows: list, problems: problems, checked: checked };
   }
 
